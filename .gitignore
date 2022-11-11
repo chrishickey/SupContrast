@@ -131,3 +131,10 @@ dmypy.json
 # Pyre type checker
 .pyre/
 save/
+wandb/
+encoder_models/
+score_utils/
+
+# files
+./notebooks/
+./sh_files/

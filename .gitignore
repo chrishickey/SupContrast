@@ -132,7 +132,7 @@ dmypy.json
 .pyre/
 save/
 wandb/
-encoder_models/
+#encoder_models/
 score_utils/
 
 # files

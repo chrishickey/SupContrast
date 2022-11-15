@@ -138,3 +138,7 @@ score_utils/
 # files
 ./notebooks/
 ./sh_files/
+./make_resize.py 
+notebooks/
+sh_files/
+utils/

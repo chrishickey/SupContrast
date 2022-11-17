@@ -143,3 +143,4 @@ notebooks/
 sh_files/
 utils/
 main_f1score.py
+train_supcon_50p_group4.sh

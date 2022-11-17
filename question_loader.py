@@ -88,8 +88,7 @@ class Question2Dataset(BaseQuestionLoader):
         samples = [torch.squeeze(torch.stack(samples1), dim=0),
                    torch.squeeze(torch.stack(samples2), dim=0)]
         if samples[0].shape[0] != 3:
-
-            shutil.move(os.path.join(self.root, dir_name),"/media0/chris/group4/error_files/question1")
+            shutil.rmtree(os.path.join(self.root, dir_name))
             print(f"removed {os.path.join(self.root, dir_name)}")
 
         return samples
@@ -123,7 +122,7 @@ class Question3Dataset(BaseQuestionLoader):
                    torch.squeeze(torch.stack(samples2), dim=0)]
         if samples[0].shape[0] != 6:
         #    # Delete question if it is invalid
-        #    shutil.rmtree(os.path.join(self.root, dir_name))
+            shutil.rmtree(os.path.join(self.root, dir_name))
             print(f"removed {os.path.join(self.root, dir_name)}")
 
         return samples
@@ -160,7 +159,7 @@ class Question4Dataset(BaseQuestionLoader):
                    torch.squeeze(torch.stack(samples2), dim=0)]
         if samples[0].shape[0] != 5:
 
-            shutil.move(os.path.join(self.root, dir_name),"/media0/chris/group4/error_files/question2")
+            shutil.rmtree(os.path.join(self.root, dir_name))
             print(f"removed {os.path.join(self.root, dir_name)}")
 
         return samples

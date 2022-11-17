@@ -58,7 +58,7 @@ class Question1Dataset(BaseQuestionLoader):
 
         if samples[0].shape[0] != 4:
             # Delete question if it is invalid
-            shutil.rmtree(os.path.join(self.root, dir_name))
+            #shutil.rmtree(os.path.join(self.root, dir_name))
             print(f"removed {os.path.join(self.root, dir_name)}")
 
         return samples
@@ -88,6 +88,7 @@ class Question2Dataset(BaseQuestionLoader):
         samples = [torch.squeeze(torch.stack(samples1), dim=0),
                    torch.squeeze(torch.stack(samples2), dim=0)]
         if samples[0].shape[0] != 3:
+
             shutil.move(os.path.join(self.root, dir_name),"/media0/chris/group4/error_files/question1")
             print(f"removed {os.path.join(self.root, dir_name)}")
 
@@ -106,7 +107,7 @@ class Question3Dataset(BaseQuestionLoader):
                 positive_samples = positive_samples + question['images']
 
         for answer in info['Answers']:
-            if answer['group_id'] == info["correct_answer_group_ID"][0]:
+            if answer['group_id'] == info["correct_answer_group_ID"]:
                 positive_samples = positive_samples + answer['images']
 
         samples1, samples2 = [], []
@@ -121,8 +122,8 @@ class Question3Dataset(BaseQuestionLoader):
         samples = [torch.squeeze(torch.stack(samples1), dim=0),
                    torch.squeeze(torch.stack(samples2), dim=0)]
         if samples[0].shape[0] != 6:
-            # Delete question if it is invalid
-            shutil.rmtree(os.path.join(self.root, dir_name))
+        #    # Delete question if it is invalid
+        #    shutil.rmtree(os.path.join(self.root, dir_name))
             print(f"removed {os.path.join(self.root, dir_name)}")
 
         return samples
@@ -158,7 +159,12 @@ class Question4Dataset(BaseQuestionLoader):
         samples = [torch.squeeze(torch.stack(samples1), dim=0),
                    torch.squeeze(torch.stack(samples2), dim=0)]
         if samples[0].shape[0] != 5:
+<<<<<<< HEAD
             shutil.move(os.path.join(self.root, dir_name),"/media0/chris/group4/error_files/question2")
+=======
+            # Delete question if it is invalid
+            #shutil.rmtree(os.path.join(self.root, dir_name))
+>>>>>>> 402cb2d4c854392d9bc92ba7ceb73ebf85a6dddd
             print(f"removed {os.path.join(self.root, dir_name)}")
 
         return samples
@@ -196,6 +202,38 @@ class Group2Dataset(BaseQuestionLoader):
         #print(samples[0].shape[0])
         if samples[0].shape[0] != 2:
             shutil.rmtree(os.path.join(self.root, dir_name))
+            print(f"removed {os.path.join(self.root, dir_name)}")
+
+        return samples
+
+
+
+class Group3Dataset(BaseQuestionLoader):
+    """Code for extracting all positive samples from question2s."""
+
+    def __getitem__(self, idx):
+
+        dir_name, info = self.get_dirname_and_info(idx)
+
+        positive_samples = info['Questions'][0]['images']
+        for answer in info['Answers']:
+            if answer['group_id'] == info["correct_answer_group_ID"][0]:
+                positive_samples = positive_samples + answer['images']
+
+        samples1, samples2 = [], []
+        for im in positive_samples:
+            image = Image.open(os.path.join(
+                self.root, dir_name, im['image_url']
+            )).convert('RGB')
+            # Augment the images twice.
+            sample1, sample2 = self.transform(image)
+            samples1.append(sample1)
+            samples2.append(sample2)
+        samples = [torch.squeeze(torch.stack(samples1), dim=0),
+                   torch.squeeze(torch.stack(samples2), dim=0)]
+        if samples[0].shape[0] != 2:
+            # Delete question if it is invalid
+            #shutil.rmtree(os.path.join(self.root, dir_name))
             print(f"removed {os.path.join(self.root, dir_name)}")
 
         return samples

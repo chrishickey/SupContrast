@@ -142,3 +142,4 @@ score_utils/
 notebooks/
 sh_files/
 utils/
+main_f1score.py

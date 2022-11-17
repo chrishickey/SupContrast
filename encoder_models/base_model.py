@@ -44,7 +44,7 @@ class BaseModel:
         image_vectors = []
         image_names = []
         num_images = len(glob.glob(f'{self.question_dir}/*/*.jpg'))
-        print(f">>>>{self.question_dir}/*/*.jpg", num_images)
+        print(f"{self.question_dir}/*/*.jpg", num_images)
         
         for image_path in glob.glob(f'{self.question_dir}/*/*.jpg'):
             file_name = os.path.basename(image_path)
@@ -54,7 +54,7 @@ class BaseModel:
             try:
                 image_vectors.append(self._preprocess_image(image_path))
             except:
-                print('move_file>>>',image_path)
+                print('move_file',image_path)
                 shutil.move(image_path,"/media0/chris/group4/error_files/")
                 print("Finished image preprocessing")
 

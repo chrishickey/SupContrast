@@ -159,12 +159,8 @@ class Question4Dataset(BaseQuestionLoader):
         samples = [torch.squeeze(torch.stack(samples1), dim=0),
                    torch.squeeze(torch.stack(samples2), dim=0)]
         if samples[0].shape[0] != 5:
-<<<<<<< HEAD
+
             shutil.move(os.path.join(self.root, dir_name),"/media0/chris/group4/error_files/question2")
-=======
-            # Delete question if it is invalid
-            #shutil.rmtree(os.path.join(self.root, dir_name))
->>>>>>> 402cb2d4c854392d9bc92ba7ceb73ebf85a6dddd
             print(f"removed {os.path.join(self.root, dir_name)}")
 
         return samples

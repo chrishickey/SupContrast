@@ -58,7 +58,7 @@ QUIZ_OPTIONS = {
     7: group4_question1,
     8: group4_question2,
 }
-#/media0/chris/group4/valid/question1/cache/a304495db1244042ae9bdbb582c89744.jpg.npy'
+
 def f1_graph(epoch,question_number,model_name,weights_path,opt,question_dir,file_name,title):
     score_model = MODELS[model_name](
             weights_path=weights_path,
@@ -90,15 +90,13 @@ def main():
 
     parser = argparse.ArgumentParser('argument for training')
     parser.add_argument('--mean', type=str,default="(0.6958, 0.6816, 0.6524)")
+    parser.add_argument('--root_dir', type=str,default= "/media0/chris/group4_resize_v2")
     parser.add_argument('--std', type=str,default= "(0.3159, 0.3100, 0.3385)")
+    parser.add_argument('--weights_path', type=str,default= "/Gits/chris/SupContrast/save/SupCon/path_models/SupCon_path_resnet50_lr_0.005_decay_0.0001_bsz_256_temp_0.1_trial_0_cosine")
     opt = parser.parse_args()
 
-
-    #weights = ["/Gits/chris/SupContrast/save/SupCon/path_models/SupCon_path_resnet50_lr_0.005_decay_0.0001_bsz_256_temp_0.1_trial_0_cosine/ckpt_SupCon_pretrained_False_group4_epoch_5.pth"]
-    weights_path = "/Gits/chris/SupContrast/save/SupCon/path_models/SupCon_path_resnet50_lr_0.005_decay_0.0001_bsz_256_temp_0.1_trial_0_cosine"
     weights = sorted(glob(f"{weights_path}/*.pth"))
     model_name = 'vit'
-    root_dir = "/media0/chris/group4_resize_v2"
     valid_path = "valid"
     test_path = "test"
     #for epoch,weights_path in enumerate(weights):

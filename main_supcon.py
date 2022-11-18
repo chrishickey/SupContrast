@@ -63,9 +63,9 @@ QUIZ_OPTIONS = {
 def parse_option():
     parser = argparse.ArgumentParser('argument for training')
 
-    parser.add_argument('--print_freq', type=int, default=1,
+    parser.add_argument('--print_freq', type=int, default=10,
                         help='print frequency')
-    parser.add_argument('--save_freq', type=int, default=10,
+    parser.add_argument('--save_freq', type=int, default=1,
                         help='save frequency')
     parser.add_argument('--batch_size', type=int, default=256,
                         help='batch_size')
@@ -102,6 +102,8 @@ def parse_option():
     parser.add_argument('--pretrained', type=bool, default=False)
     parser.add_argument('--wandb_id', type=str, default="")
     parser.add_argument('--wandb', type=bool, default=True)
+    parser.add_argument('--wandb_pn', type=str, default="")
+    parser.add_argument('--question_number', type=int)
     
     # method
     parser.add_argument('--method', type=str, default='SupCon',
@@ -438,6 +440,7 @@ def train_category(train_loader, model, criterion, optimizer, epoch, opt):
     return losses.avg
 
 def f1_graph(epoch,question_number,model_name,weights_path,opt,question_dir,file_name,title):
+
     score_model = MODELS[model_name](
             weights_path=weights_path,
             mean=eval(opt.mean),
@@ -453,10 +456,9 @@ def f1_graph(epoch,question_number,model_name,weights_path,opt,question_dir,file
         file_name,
     )
     var=CALCULATOR[question_number](
-
+        
         answer_file = file_name,
     )
-    print('VAR->',var)
     var = list(var)
 
     if opt.wandb:wandb.log({'micro_f1'+title: var[0]}, step=epoch)
@@ -465,7 +467,7 @@ def f1_graph(epoch,question_number,model_name,weights_path,opt,question_dir,file
 
 def main():
     opt = parse_option()
-    if opt.wandb:wandb.init(project="50percent", entity=opt.wandb_id)
+    if opt.wandb:wandb.init(project=opt.wandb_pn, entity=opt.wandb_id)
     # build data loader
     if opt.method == 'SimCLR':
         train_loader = set_loader_category(opt)
@@ -483,6 +485,7 @@ def main():
 
     # training routine
     for epoch in range(1, opt.epochs + 1):
+
         adjust_learning_rate(opt, optimizer, epoch)
 
         # train for one epoch
@@ -503,16 +506,12 @@ def main():
 
             weights_path = os.path.join(
                 opt.save_folder,weights_name)
-            file_name = weights_path.replace('pth','csv')
             save_model(model, optimizer, opt, epoch, weights_path)
             model_name = 'vit'
             valid_path = "valid"
             test_path = "test"
 
             root_dir = "/".join(opt.data_folder.split("/")[:-1]) 
-            
-            print(f'weights_path->{weights_path}')
-            print(f'file_name->{file_name}')
 
     # save the last model
     save_file = os.path.join(

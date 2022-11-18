@@ -439,32 +439,6 @@ def train_category(train_loader, model, criterion, optimizer, epoch, opt):
 
     return losses.avg
 
-def f1_graph(epoch,question_number,model_name,weights_path,opt,question_dir,file_name,title):
-
-    score_model = MODELS[model_name](
-            weights_path=weights_path,
-            mean=eval(opt.mean),
-            std=eval(opt.std),
-            question_dir=question_dir,
-        )
-
-    score_model.encode_images()
-
-    QUIZ_OPTIONS[question_number](
-        score_model,
-        question_dir,
-        file_name,
-    )
-    var=CALCULATOR[question_number](
-        
-        answer_file = file_name,
-    )
-    var = list(var)
-
-    if opt.wandb:wandb.log({'micro_f1'+title: var[0]}, step=epoch)
-    if opt.wandb:wandb.log({'macro_f1'+title: var[1]}, step=epoch)
-
-
 def main():
     opt = parse_option()
     if opt.wandb:wandb.init(project=opt.wandb_pn, entity=opt.wandb_id)

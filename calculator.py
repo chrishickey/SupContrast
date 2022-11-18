@@ -110,7 +110,6 @@ def calculate4_both(answer_file: str) -> typing.Tuple[float, float]:
             _, cat, gt1, gt2, ans1, ans2 = line.replace('\n', "").split(',')
             if cat not in result_dict:
                 result_dict[cat] = dict(TP=0, FN=0, FP=0)
-            #for ans in ans1, ans2:
             if ans1 in [gt1, gt2] and ans2 in [gt1, gt2]:
                 result_dict[cat]['TP'], TTP = increment(result_dict[cat]['TP'], TTP)
             else:

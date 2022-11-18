@@ -144,3 +144,4 @@ sh_files/
 utils/
 main_f1score.py
 train_supcon50_group4.sh
+inference_group4.sh

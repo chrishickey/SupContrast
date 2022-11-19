@@ -101,9 +101,8 @@ def parse_option():
     parser.add_argument('--size', type=int, default=32, help='parameter for RandomResizedCrop')
     parser.add_argument('--pretrained', type=bool, default=False)
     parser.add_argument('--wandb_id', type=str, default="")
-    parser.add_argument('--wandb', type=bool, default=True)
+    parser.add_argument('--wandb', type=bool, default=False)
     parser.add_argument('--wandb_pn', type=str, default="")
-    parser.add_argument('--question_number', type=int)
     
     # method
     parser.add_argument('--method', type=str, default='SupCon',

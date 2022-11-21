@@ -97,16 +97,16 @@ def main():
     file_name = opt.weights_path.replace('pth','csv')
 
     question1_val_dir = f"{opt.root_dir}/{opt.valid_path}/question1"
-    f1_graph(7,opt.model_name,opt.weights_path,opt,question1_val_dir,file_name,"question1_valid")
+    f1_graph(7, opt.model_name, opt.weights_path, opt, question1_val_dir, file_name, "question1_valid")
 
     question1_tst_dir = f"{opt.root_dir}/{opt.test_path}/question1"
-    f1_graph(7,opt.model_name,opt.weights_path,opt,question1_tst_dir,file_name,"question1_test")
+    f1_graph(7, opt.model_name, opt.weights_path, opt,question1_tst_dir, file_name, "question1_test")
 
     question2_val_dir = f"{opt.root_dir}/{opt.valid_path}/question2"
-    f1_graph(8,opt.model_name,opt.weights_path,opt,question2_val_dir,file_name,"question2_valid")
+    f1_graph(8, opt.model_name, opt.weights_path, opt,question2_val_dir, file_name, "question2_valid")
 
     question2_tst_dir = f"{opt.root_dir}/{opt.test_path}/question2"
-    f1_graph(8,opt.model_name,opt.weights_path,opt,question2_tst_dir,file_name,"question2_test")
+    f1_graph(8, opt.model_name, opt.weights_path, opt,question2_tst_dir, file_name, "question2_test")
 
 if __name__ == '__main__':
     main()

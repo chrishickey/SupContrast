@@ -18,20 +18,16 @@ def main(image_dir: str):
     channels_sum, channels_squared_sum, num_batches = 0, 0, 0
     count = 0
     for data, _ in tqdm(dataloader):
-        try:
-            # Mean over batch, height and width, but not over the channels
-            channels_sum += torch.mean(data, dim=[0, 2, 3])
-            channels_squared_sum += torch.mean(data ** 2, dim=[0, 2, 3])
-            num_batches += 1
-            count +=1
-            if count%100==0:
-                mean = channels_sum / num_batches
-                std = (channels_squared_sum / num_batches - mean ** 2) ** 0.5
-                print(f'count->{count}, mean->{mean}, std->{std}')
-        except:
-            print('except->', data)
-            continue
-    print('errorB')
+
+        # Mean over batch, height and width, but not over the channels
+        channels_sum += torch.mean(data, dim=[0, 2, 3])
+        channels_squared_sum += torch.mean(data ** 2, dim=[0, 2, 3])
+        num_batches += 1
+        count +=1
+        if count%100==0:
+            mean = channels_sum / num_batches
+            std = (channels_squared_sum / num_batches - mean ** 2) ** 0.5
+            print(f'count->{count}, mean->{mean}, std->{std}')
     mean = channels_sum / num_batches
 
     # std = sqrt(E[X^2] - (E[X])^2)

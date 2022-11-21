@@ -51,13 +51,7 @@ class BaseModel:
             counter += 1
             if file_name in self.vector_cache:
                 continue
-            try:
-                image_vectors.append(self._preprocess_image(image_path))
-            except:
-                print('move_file',image_path)
-                shutil.move(image_path,"/media0/chris/group4/error_files/")
-                print("Finished image preprocessing")
-
+            image_vectors.append(self._preprocess_image(image_path))
             image_names.append(file_name)
             self.vector_cache.add(file_name)
             if len(image_vectors) == batch_size:

@@ -142,17 +142,15 @@ class Question4Dataset(BaseQuestionLoader):
 
         samples1, samples2 = [], []
         for im in positive_samples:
-            try:
-                image = Image.open(os.path.join(
-                    self.root, dir_name, im['image_url']
-                )).convert('RGB')
-                # Augment the images twice.
-                sample1, sample2 = self.transform(image)
-                samples1.append(sample1)
-                samples2.append(sample2)
-            except:
-                print("Error",os.path.join(self.root, dir_name, im['image_url']))
-                #continue
+
+            image = Image.open(os.path.join(
+                self.root, dir_name, im['image_url']
+            )).convert('RGB')
+            # Augment the images twice.
+            sample1, sample2 = self.transform(image)
+            samples1.append(sample1)
+            samples2.append(sample2)
+            
         samples = [torch.squeeze(torch.stack(samples1), dim=0),
                    torch.squeeze(torch.stack(samples2), dim=0)]
         if samples[0].shape[0] != 5:

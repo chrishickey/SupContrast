@@ -63,7 +63,6 @@ class BaseModel:
             if len(image_vectors) == batch_size:
                 preprocessed_images = self.encode(torch.stack(image_vectors))
                 for i in range(batch_size):
-                    #print(os.path.join(self.cache_dir, f"{image_names[i]}.npy"))
                     np.save(os.path.join(self.cache_dir, f"{image_names[i]}.npy"), preprocessed_images[i,:])
                 image_vectors, image_names = [], []
                 print(f"Preprocessed {counter}/{num_images} images.")

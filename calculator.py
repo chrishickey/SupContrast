@@ -2,8 +2,6 @@
 import typing
 import sys
 
-ep = sys.float_info.epsilon
-
 def increment(*args) -> typing.List[int]:
     """Increment all given numbers"""
     return [arg + 1 for arg in args]
@@ -29,7 +27,7 @@ def print_results(TTP: int, TFP: int, TFN: int, result_dict: typing.Dict) -> typ
     precision = TTP / (TTP + TFP)
     recall = TTP / (TTP + TFN)
 
-    f = 2 * ((precision * recall) / (precision + recall+ep))
+    f = 2 * ((precision * recall) / (precision + recall))
     print(f'Micro f score {f}')
     return sum(fscores) / len(fscores), f
 

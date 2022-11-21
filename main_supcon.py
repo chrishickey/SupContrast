@@ -439,7 +439,8 @@ def train_category(train_loader, model, criterion, optimizer, epoch, opt):
 
 def main():
     opt = parse_option()
-    if opt.wandb:wandb.init(project=opt.wandb_pn, entity=opt.wandb_id)
+    if opt.wandb:
+        wandb.init(project=opt.wandb_pn, entity=opt.wandb_id)
     # build data loader
     if opt.method == 'SimCLR':
         train_loader = set_loader_category(opt)
@@ -466,7 +467,8 @@ def main():
             loss = train_category(train_loader, model, criterion, optimizer, epoch, opt)
         else:
             loss = train(train_loader, model, criterion, optimizer, epoch, opt)
-        if opt.wandb:wandb.log({'loss':loss}, step=epoch)
+        if opt.wandb:
+            wandb.log({'loss':loss}, step=epoch)
         time2 = time.time()
         # tensorboard logger
         logger.log_value('loss', loss, epoch)

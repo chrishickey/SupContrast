@@ -43,10 +43,11 @@ class BaseModel:
         os.mkdir(self.cache_dir)
         image_vectors = []
         image_names = []
-        num_images = len(glob.glob(f'{self.question_dir}/*/*.jpg'))
+        type = f'{self.question_dir}/*/*.jp*'
+        num_images = len(glob.glob(type))
         print(f"{self.question_dir}/*/*.jpg", num_images)
         
-        for image_path in glob.glob(f'{self.question_dir}/*/*.jpg'):
+        for image_path in glob.glob(type):
             file_name = os.path.basename(image_path)
             counter += 1
             if file_name in self.vector_cache:

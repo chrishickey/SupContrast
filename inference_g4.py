@@ -1,31 +1,11 @@
 from __future__ import print_function
 
-import os
-import sys
 import argparse
-import time
-import math
-import timm
-import tensorboard_logger as tb_logger
-import torch
-import torch.backends.cudnn as cudnn
-from torchvision import transforms, datasets
-
 from question_loader import Question1Dataset, Question2Dataset, Question3Dataset, Question4Dataset, Group2Dataset
-from util import TwoCropTransform, AverageMeter
-from util import adjust_learning_rate, warmup_learning_rate
-from util import set_optimizer, save_model
-from timm.data import resolve_data_config
-from timm.data.transforms_factory import create_transform
-from networks.vit import SupConVit
-from losses import SupConLoss
 import wandb
 from calculator import calculate1, calculate3, calculate4, calculate4_both
 from quiz_master import quiz3, quiz1, quiz2,  quiz4, group2, group4_question1, group4_question2
 from encoder_models.vit import RankVit, ClusterVit
-from encoder_models.resnet import Resnet
-from tqdm import tqdm
-from glob import glob
 
 try:
     import apex
@@ -35,7 +15,6 @@ except ImportError:
 
 MODELS = {
     'vit': ClusterVit,
-    'resnet': Resnet,
     'rankvit': RankVit
 }
 

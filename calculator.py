@@ -43,6 +43,8 @@ def calculate1(answer_file: str) -> typing.Tuple[float, float]:
                 header_skipped = True
                 continue
             _, cat, gt, ans = line.replace('\n', "").split(',')
+            _, cat, gt, ans = _, cat, int(gt), int(bool(ans))
+            print(f'gt->{gt}, ans->{ans}', gt == ans )
             if cat not in result_dict:
                 result_dict[cat] = dict(TP=0, FN=0, FP=0)
             if ans == gt:

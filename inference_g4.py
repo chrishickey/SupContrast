@@ -58,7 +58,7 @@ QUIZ_OPTIONS = {
     7: group4_question1,
     8: group4_question2,
 }
-#/media0/chris/group4/valid/question1/cache/a304495db1244042ae9bdbb582c89744.jpg.npy'
+
 def f1_graph(question_number,model_name,weights_path,opt,question_dir,file_name,title):
     score_model = MODELS[model_name](
             weights_path=weights_path,

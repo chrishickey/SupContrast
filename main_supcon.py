@@ -36,7 +36,6 @@ except ImportError:
 
 MODELS = {
     'vit': ClusterVit,
-    'resnet': Resnet,
     'rankvit': RankVit
 }
 
